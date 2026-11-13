@@ -1,6 +1,11 @@
 import { supabase } from '@/lib/supabase';
 import type { UserProfile } from '@/types';
 
+function requireClient() {
+  if (!supabase) throw new Error('Die Datenbank ist nicht verbunden.');
+  return supabase;
+}
+
 interface UserProfileRow {
   first_name: string;
   last_name: string;
@@ -26,7 +31,7 @@ function fromRow(row: UserProfileRow): UserProfile {
 }
 
 export async function loadLatestUserProfile(): Promise<UserProfile | null> {
-  const { data, error } = await supabase
+  const { data, error } = await requireClient()
     .from('user_profiles')
     .select('first_name, last_name, email, shoe_size, weight_kg, printer, sole_material, upper_material')
     .order('created_at', { ascending: false })
@@ -39,7 +44,7 @@ export async function loadLatestUserProfile(): Promise<UserProfile | null> {
 }
 
 export async function saveUserProfile(profile: UserProfile): Promise<void> {
-  const { error } = await supabase.from('user_profiles').insert({
+  const { error } = await requireClient().from('user_profiles').insert({
     first_name: profile.firstName,
     last_name: profile.lastName,
     email: profile.email,
