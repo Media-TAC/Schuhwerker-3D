@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { IPhoneFrame } from '@/components/IPhoneFrame';
 import { StepIndicator } from '@/components/StepIndicator';
 import { OnboardingOverlay } from '@/components/OnboardingOverlay';
+import { ExitConfirmDialog } from '@/components/ExitConfirmDialog';
 import { SplashStep } from '@/components/steps/SplashStep';
 import { SettingsPage } from '@/components/SettingsPage';
 import { OnboardingStep } from '@/components/steps/OnboardingStep';
@@ -24,6 +25,7 @@ function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [onboardingEnabled, setOnboardingEnabled] = useOnboardingEnabled();
   const [onboardingActive, setOnboardingActive] = useState(false);
+  const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
 
   const next = useCallback(() => dispatch({ type: 'NEXT' }), [dispatch]);
   const reset = useCallback(() => dispatch({ type: 'RESET' }), [dispatch]);
@@ -69,7 +71,7 @@ function App() {
 
   return (
     <IPhoneFrame>
-      <StepIndicator step={state.step} onHelp={() => setOnboardingActive(true)} />
+      <StepIndicator step={state.step} onHome={() => setExitConfirmOpen(true)} />
       {state.step === 0 && (
         <OnboardingStep
           state={state}
@@ -104,6 +106,17 @@ function App() {
           highlights={highlights}
           onComplete={() => setOnboardingActive(false)}
           onSkip={() => setOnboardingActive(false)}
+        />
+      )}
+
+      {exitConfirmOpen && (
+        <ExitConfirmDialog
+          onCancel={() => setExitConfirmOpen(false)}
+          onConfirm={() => {
+            setExitConfirmOpen(false);
+            setOnboardingActive(false);
+            reset();
+          }}
         />
       )}
     </IPhoneFrame>
