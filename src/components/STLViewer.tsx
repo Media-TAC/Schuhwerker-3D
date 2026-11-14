@@ -7,7 +7,6 @@ import {
   Group,
   Mesh,
   MeshStandardMaterial,
-  Material,
   Color,
   DoubleSide,
   Box3,
@@ -61,7 +60,6 @@ async function fetchObjMaterialMap(url: string): Promise<Map<string, string[]>> 
     const resp = await fetch(url);
     const text = await resp.text();
     let currentObj = '';
-    let currentMtl: string | null = null;
     for (const line of text.split('\n')) {
       const parts = line.trim().split(/\s+/);
       if (!parts[0]) continue;

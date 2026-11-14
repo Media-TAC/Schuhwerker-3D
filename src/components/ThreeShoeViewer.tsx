@@ -232,7 +232,7 @@ export function ThreeShoeViewer({ state, className = '' }: ThreeShoeViewerProps)
   }, []);
 
   useEffect(() => {
-    let raf = requestAnimationFrame(draw);
+    const raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
   }, [draw]);
 
