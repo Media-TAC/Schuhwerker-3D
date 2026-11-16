@@ -50,7 +50,7 @@ export function SplashStep({ onStart, onOpenSettings }: SplashStepProps) {
       {/* Slogan — top area */}
       <div className="relative z-10 flex-1 flex flex-col justify-end px-6 pb-6">
         <div className="mb-8">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60 mb-2">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-signal mb-2">
             Schuhwerker 3D
           </p>
           <h1 className="text-[30px] font-bold tracking-tight text-white leading-[1.1]">

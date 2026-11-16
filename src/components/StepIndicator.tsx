@@ -17,7 +17,7 @@ export function StepIndicator({ step, onHome }: StepIndicatorProps) {
         </span>
         <span className="font-mono-tight text-[12px] text-technical">/ {String(total).padStart(2, '0')}</span>
       </div>
-      <h1 className="text-[13px] font-semibold tracking-tight text-carbon">Schuhwerker 3D</h1>
+      <h1 className="text-[13px] font-semibold tracking-tight text-signal">Schuhwerker 3D</h1>
       <div className="flex items-center gap-1.5">
         {STEP_LABELS.map((_, i) => (
           <div
